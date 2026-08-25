@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sicorporation224 — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#221022;
+    --bg-dark2:#341634;
+    --cream:#FFF8ED;
+    --cream-dim:#e9d9e8;
+
+    --kebab:#FF4B3E;
+    --kebab-dark:#B5271C;
+    --hampers:#E84393;
+    --hampers-dark:#9E1F63;
+    --solo:#C97B2E;
+    --solo-dark:#8A5219;
+    --bolue:#3FB5C9;
+    --bolue-dark:#1E7A8C;
+    --yellow:#FFC93C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(circle at 10% -5%, rgba(255,201,60,0.14), transparent 40%),
+      radial-gradient(circle at 95% 10%, rgba(63,181,201,0.16), transparent 42%),
+      radial-gradient(circle at 50% 100%, rgba(232,67,147,0.12), transparent 45%),
+      var(--bg-dark);
+    color:var(--cream);
+    font-family:'Nunito', sans-serif;
+    min-height:100vh;
+  }
+  .grain{
+    position:fixed; inset:0; pointer-events:none; opacity:0.04; z-index:1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 6vw;
+    background:rgba(34,16,34,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:3px solid var(--yellow);
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Baloo 2', sans-serif; font-weight:800;
+    font-size:1.2rem; color:var(--cream); letter-spacing:0.4px;
+  }
+  .brand .mark{
+    width:36px; height:36px; border-radius:11px;
+    background:linear-gradient(135deg, var(--kebab), var(--hampers), var(--bolue));
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+  }
+  .topbar .tag{
+    font-size:0.72rem; font-weight:800; letter-spacing:2px; color:var(--yellow);
+    background:rgba(255,201,60,0.12); border:1.5px solid var(--yellow);
+    padding:6px 14px; border-radius:999px; text-transform:uppercase;
+  }
+
+  .hero{
+    padding:64px 6vw 20px; text-align:center; position:relative; z-index:2;
+  }
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.06); border:1.5px solid rgba(255,255,255,0.15);
+    color:var(--cream-dim); font-weight:800; font-size:0.72rem; letter-spacing:2px;
+    text-transform:uppercase; padding:6px 16px; border-radius:999px; margin-bottom:20px;
+  }
+  .hero h1{
+    font-family:'Baloo 2', sans-serif; font-weight:800;
+    font-size:clamp(2.2rem, 5vw, 3.6rem); line-height:1.05;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(90deg, var(--kebab), var(--hampers), var(--bolue));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{
+    max-width:56ch; margin:18px auto 0; color:var(--cream-dim);
+    font-size:1.02rem; line-height:1.6;
+  }
+
+  .grid{
+    position:relative; z-index:2;
+    max-width:1120px; margin:52px auto 80px; padding:0 6vw;
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:26px;
+  }
+  .tile{
+    position:relative; overflow:hidden;
+    border-radius:26px; padding:32px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    min-height:220px;
+    text-decoration:none; color:var(--cream);
+    box-shadow:0 14px 0 rgba(0,0,0,0.28);
+    transition:transform .2s ease, box-shadow .2s ease;
+    cursor:pointer;
+  }
+  .tile:hover{transform:translateY(-6px);}
+  .tile:active{transform:translateY(4px); box-shadow:0 8px 0 rgba(0,0,0,0.28);}
+
+  .tile.kebab{background:linear-gradient(135deg, var(--kebab), var(--kebab-dark));}
+  .tile.hampers{background:linear-gradient(135deg, var(--hampers), var(--hampers-dark));}
+  .tile.solo{background:linear-gradient(135deg, var(--solo), var(--solo-dark));}
+  .tile.bolue{background:linear-gradient(135deg, var(--bolue), var(--bolue-dark));}
+
+  .tile .deco{
+    position:absolute; font-size:7rem; opacity:0.14; right:-14px; bottom:-24px;
+    transform:rotate(-8deg); pointer-events:none;
+  }
+  .tile .top-row{display:flex; align-items:center; justify-content:space-between;}
+  .tile .icon-box{
+    width:54px; height:54px; border-radius:16px; background:rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center; font-size:1.7rem;
+  }
+  .tile .status{
+    font-size:0.68rem; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+    padding:5px 12px; border-radius:999px; background:rgba(255,255,255,0.18);
+  }
+  .tile .status.live{background:rgba(107,203,63,0.9); color:#12240a;}
+  .tile h2{
+    font-family:'Baloo 2', sans-serif; font-weight:800; font-size:1.6rem; margin-top:18px;
+  }
+  .tile p{font-size:0.88rem; color:rgba(255,248,237,0.85); margin-top:6px; max-width:34ch;}
+  .tile .cta{
+    margin-top:20px; display:inline-flex; align-items:center; gap:8px;
+    font-weight:800; font-size:0.85rem;
+  }
+  .tile .cta .arrow{transition:transform .2s ease;}
+  .tile:hover .cta .arrow{transform:translateX(5px);}
+
+  footer{
+    position:relative; z-index:2; padding:36px 6vw 30px; text-align:center;
+    border-top:3px solid var(--yellow);
+  }
+  footer .fbrand{
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.15rem; color:var(--yellow);
+  }
+  footer p{color:var(--cream-dim); font-size:0.78rem; margin-top:6px;}
+
+  .toast{
+    position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(20px);
+    background:var(--cream); color:var(--bg-dark); font-weight:800; font-size:0.88rem;
+    padding:14px 22px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.4);
+    opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
+    z-index:99; max-width:88vw; text-align:center;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:720px){
+    .grid{grid-template-columns:1fr;}
+    .topbar .tag{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="mark">🏷️</div>
+    sicorporation224
+  </div>
+  <span class="tag">Dashboard Menu</span>
+</div>
+
+<section class="hero">
+  <span class="eyebrow">✦ Semua Usaha, Satu Tempat</span>
+  <h1>Pilih <span class="grad">Menu Usaha</span><br>sicorporation224</h1>
+  <p>Empat brand, satu dashboard. Klik salah satu menu di bawah untuk membuka usaha yang kamu tuju.</p>
+</section>
+
+<div class="grid">
+
+  <a class="tile kebab" href="https://sicorporation224-eng.github.io/sikebab/" target="_blank" rel="noopener">
+    <span class="deco">🌯</span>
+    <div class="top-row">
+      <div class="icon-box">🌯</div>
+      <span class="status live">Buka</span>
+    </div>
+    <div>
+      <h2>si.Kebab</h2>
+      <p>Kebab &amp; snack frozen homemade — catat belanja &amp; penjualan.</p>
+      <span class="cta">Buka Menu <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  <a class="tile hampers" href="#" onclick="showToast(event, 'si.Hampers')">
+    <span class="deco">🎁</span>
+    <div class="top-row">
+      <div class="icon-box">🎁</div>
+      <span class="status">Segera</span>
+    </div>
+    <div>
+      <h2>si.Hampers</h2>
+      <p>Paket hampers &amp; hadiah untuk berbagai momen spesial.</p>
+      <span class="cta">Buka Menu <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  <a class="tile solo" href="#" onclick="showToast(event, 'si.Solo')">
+    <span class="deco">🏮</span>
+    <div class="top-row">
+      <div class="icon-box">🏮</div>
+      <span class="status">Segera</span>
+    </div>
+    <div>
+      <h2>si.Solo</h2>
+      <p>Camilan &amp; oleh-oleh khas dengan cita rasa Solo.</p>
+      <span class="cta">Buka Menu <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  <a class="tile bolue" href="#" onclick="showToast(event, 'si.Bolue')">
+    <span class="deco">🧁</span>
+    <div class="top-row">
+      <div class="icon-box">🧁</div>
+      <span class="status">Segera</span>
+    </div>
+    <div>
+      <h2>si.Bolue</h2>
+      <p>Bolu &amp; kue lembut homemade, siap antar hari itu juga.</p>
+      <span class="cta">Buka Menu <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  <div class="fbrand">sicorporation224</div>
+  <p>Dashboard Menu Usaha · si.Kebab · si.Hampers · si.Solo · si.Bolue</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function showToast(e, name){
+    e.preventDefault();
+    const t = document.getElementById('toast');
+    t.textContent = name + ' — tautan belum tersedia, kirimkan link-nya untuk diaktifkan 🔗';
+    t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(()=> t.classList.remove('show'), 2800);
+  }
+</script>
+
+</body>
+</html>
