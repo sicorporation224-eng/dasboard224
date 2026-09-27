@@ -239,6 +239,29 @@
     color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.85);
   }
 
+  .marquee{
+    position:relative; z-index:2; overflow:hidden;
+    max-width:1120px; margin:18px auto 0; padding:12px 0;
+    border-top:2px solid rgba(255,201,60,0.35);
+    border-bottom:2px solid rgba(255,201,60,0.35);
+    background:rgba(255,255,255,0.03);
+  }
+  .marquee-track{
+    display:flex; width:max-content;
+    animation:marqueeScroll 16s linear infinite;
+  }
+  .marquee-track span{
+    display:inline-flex; align-items:center;
+    font-family:'Baloo 2', sans-serif; font-weight:800;
+    font-size:1.1rem; letter-spacing:1px; text-transform:uppercase;
+    color:var(--yellow); white-space:nowrap; padding:0 22px;
+  }
+  .marquee-track span::after{content:"✦"; margin-left:22px; color:var(--cream-dim); font-size:0.9rem;}
+  @keyframes marqueeScroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
   .orbit-hint{
     text-align:center; color:var(--cream-dim); font-size:0.75rem; font-weight:700;
     letter-spacing:0.5px; margin-top:4px;
@@ -314,6 +337,15 @@
     </div>
   </a>
 
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Kebab, Sosis Solo, Hampers, Kue Bolu</span>
+    <span>Kebab, Sosis Solo, Hampers, Kue Bolu</span>
+    <span>Kebab, Sosis Solo, Hampers, Kue Bolu</span>
+    <span>Kebab, Sosis Solo, Hampers, Kue Bolu</span>
+  </div>
 </div>
 
 
